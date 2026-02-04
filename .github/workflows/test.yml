@@ -1,7 +1,7 @@
 name: Captain Wealth Bot Test
 
 on:
-  workflow_dispatch:   # allows manual run from GitHub UI
+  workflow_dispatch:
 
 jobs:
   run-bot:
@@ -18,11 +18,12 @@ jobs:
 
       - name: Install dependencies
         run: |
+          python -m pip install --upgrade pip
           pip install requests
 
       - name: Run bot
-        run: |
-          python main.py
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
+        run: |
+          python main.py
